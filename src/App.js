@@ -1,23 +1,34 @@
-import logo from './logo.svg';
+import { useState, useEffect } from 'react'
 import './App.css';
+import Header from './components/Header'
+import RegistrationForm from './components/RegistrationForm'
+import Navigation from './components/Navigation'
+import LogInForm from './components/LogInForm';
 
-function App() {
+const App = () => {
+  const [isRegistered, setIsRegistered] = useState(true);
+
+  const ChangeForm = () => {
+    setIsRegistered(!isRegistered);
+  }
+
+  const LogIn = () => {
+    
+  }
+
+  const Register = () => {
+
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header selected={isRegistered} />
+      {isRegistered && <LogInForm onSubmit={LogIn}/>}
+      {!isRegistered && <RegistrationForm onSubmit={Register}/>}
+      <Navigation 
+        message={isRegistered ? 'Already registered? ' : "Don't have an account? "}
+        onClick ={ChangeForm}
+      />
     </div>
   );
 }
